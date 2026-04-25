@@ -1,4 +1,3 @@
-# Building-Agentic-RAG-with-Llamaindex
 # Agentic RAG with LlamaIndex
 > A multi-phase project building increasingly intelligent RAG systems — from basic router query engines to full agentic document assistants that reason, retrieve, and summarize across multiple PDFs using LlamaIndex and GPT.
 
@@ -153,20 +152,23 @@ predict_and_call() → selects right tool → executes → returns answer
 ```
 Agentic-RAG-LlamaIndex/
 │
-├── phase1_router_query_engine.py    # Router between summary and vector search
-├── phase2_function_tools.py         # Custom tools with auto-retrieval
-├── phase3_doc_tool_factory.py       # Reusable get_doc_tools() function
-├── phase4_multi_doc_agent.py        # Multi-document agentic RAG
-├── utils.py                         # get_doc_tools() helper
-├── metagpt.pdf                      # Sample research paper (test document)
-├── requirements.txt                 # All dependencies
-├── .env.example                     # API key template
+├── phase1_router_query_engine.ipynb   # Router between summary and vector search
+├── phase2_function_tools.ipynb        # Custom tools with auto-retrieval
+├── phase3_doc_tool_factory.ipynb      # Reusable get_doc_tools() function
+├── phase4_multi_doc_agent.ipynb       # Multi-document agentic RAG
+├── utils.py                           # get_doc_tools() helper
+├── helper.py                          # API key loader
+├── metagpt.pdf                        # Sample research paper
+├── requirements.txt                   # All dependencies
+├── .env.example                       # API key template
 └── README.md
 ```
 
 ---
 
 ## Getting Started
+
+> This project was completed as part of the [Building Agentic RAG with LlamaIndex](https://www.deeplearning.ai) short course on DeepLearning.AI.
 
 ### 1. Clone the repo
 ```bash
@@ -179,20 +181,24 @@ cd IBM_RAG_Specialization
 pip install -r requirements.txt
 ```
 
-### 3. Set up API key
-```bash
-cp .env.example .env
+### 3. Set up your OpenAI API key
+The project uses a `helper.py` file to load your API key securely:
+```python
+# helper.py is already included in the repo
+from helper import get_openai_api_key
+OPENAI_API_KEY = get_openai_api_key()
 ```
-Edit `.env`:
+Create a `.env` file in the root folder:
 ```
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-### 4. Run any phase
+### 4. Run the phases in order
 ```bash
-python phase1_router_query_engine.py
-# or open the notebooks in Jupyter
-jupyter notebook
+# Start with Phase 1
+jupyter notebook phase1_router_query_engine.ipynb
+
+# Then Phase 2, 3, 4 — each builds on the previous
 ```
 
 ---
@@ -233,6 +239,12 @@ vector_tool, summary_tool = get_doc_tools("research_paper.pdf", "paper")
 # Phase 4 — Multi-document agent
 agent.query("Compare the methodologies across all papers")
 ```
+
+---
+
+## Course Credit
+
+This project was built following the **Building Agentic RAG with LlamaIndex** short course on [DeepLearning.AI](https://www.deeplearning.ai), created in collaboration with LlamaIndex. The implementation, structure, and documentation were extended and personalized independently.
 
 ---
 
